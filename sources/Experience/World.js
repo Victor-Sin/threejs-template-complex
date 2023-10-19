@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Experience from './Experience.js'
 import Rock from "./GlobalScene/Rock";
 import Plane from "./GlobalScene/Plane"
+import Rondoudou from "./GlobalScene/Rondoudou";
 
 
 export default class World
@@ -19,8 +20,12 @@ export default class World
             {
                 this.setDummy()
                 // this.rock = new Rock();
-                this.plane = new Plane();
+                // this.plane = new Plane();
                 this.light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                this.pLight = new THREE.PointLight( 0xffffff, 10 );
+                this.pLight.position.set(10.5,5.5,2.5)
+                this.rondoudou = new Rondoudou();
+                this.scene.add(this.pLight)
                 this.scene.add(this.light)
                 // this.setEnv()
             }
@@ -52,6 +57,9 @@ export default class World
     {
         if(this.plane){
             this.plane.update()
+        }
+        if(this.rondoudou){
+            this.rondoudou.update()
         }
     }
 
