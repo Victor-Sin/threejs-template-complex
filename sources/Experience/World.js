@@ -1,5 +1,8 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
+import Rock from "./GlobalScene/Rock";
+import Plane from "./GlobalScene/Plane"
+
 
 export default class World
 {
@@ -15,19 +18,30 @@ export default class World
             if(_group.name === 'base')
             {
                 this.setDummy()
+                // this.rock = new Rock();
+                this.plane = new Plane();
+                this.light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                this.scene.add(this.light)
+                // this.setEnv()
             }
         })
     }
 
+    setEnv(){
+        this.resources.items.env.mapping = THREE.EquirectangularReflectionMapping
+        this.scene.environment = this.resources.items.env
+        this.scene.background = this.resources.items.env
+    }
+
     setDummy()
     {
-        this.resources.items.lennaTexture.encoding = THREE.sRGBEncoding
-        
-        const cube = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshBasicMaterial({ map: this.resources.items.lennaTexture })
-        )
-        this.scene.add(cube)        
+        // this.resources.items.lennaTexture.encoding = THREE.sRGBEncoding
+
+        // const cube = new THREE.Mesh(
+        //     new THREE.BoxGeometry(1, 1, 1),
+        //     new THREE.MeshBasicMaterial({ map: this.resources.items.lennaTexture })
+        // )
+        // this.scene.add(cube)
     }
 
     resize()
@@ -36,6 +50,9 @@ export default class World
 
     update()
     {
+        if(this.plane){
+            this.plane.update()
+        }
     }
 
     destroy()

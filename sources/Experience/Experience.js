@@ -11,6 +11,7 @@ import Camera from './Camera.js'
 import World from './World.js'
 
 import assets from './assets.js'
+import Mouse from "./Mouse";
 
 export default class Experience
 {
@@ -43,6 +44,8 @@ export default class Experience
         this.setRenderer()
         this.setResources()
         this.setWorld()
+        this.setMouse()
+
         
         this.sizes.on('resize', () =>
         {
@@ -109,6 +112,10 @@ export default class Experience
     setWorld()
     {
         this.world = new World()
+    }
+
+    setMouse(){
+        this.mouse = new Mouse()
     }
 
     update()
