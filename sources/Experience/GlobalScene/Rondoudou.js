@@ -20,6 +20,8 @@ export default class Rondoudou extends Entity
             map: this.tex
         },this.time);
         this.setModel()
+        const coord = this.world.plain.extractCoord(0,0).toArray();
+        this.model.position.set(...coord)
     }
 
     setModel()
